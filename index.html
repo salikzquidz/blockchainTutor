@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>VoteChain</title>
+  </head>
+  <!-- BODY -->
+  <body>
+    <nav class="navigation navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">VoteChain</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="d-flex nav-item">
+              <a class="nav-link enableEthereumButton" href="#"
+                >Connect Metamask</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mainContent">
+      <h6 class="statusMetamask">
+        <span class="showAccount"></span>
+      </h6>
+      <h6 class="contractAddress"></h6>
+
+      <div class="card contractInfoContainer">
+        <div class="card-header">Contract Information</div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col">Chairperson :</div>
+              <div class="col chairPerson"></div>
+            </div>
+            <div class="row">
+              <div class="col">List of Candidates :</div>
+              <div class="col candidatesName"></div>
+            </div>
+            <div class="row">
+              <div class="col">No of Voters :</div>
+              <div class="col numberOfVoters"></div>
+            </div>
+            <div class="row">
+              <div class="col">Current Election State :</div>
+              <div class="col currElectionState"></div>
+            </div>
+            <div class="row">
+              <div class="col">Winning Candidate:</div>
+              <div class="col winningCandidate"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Admin Functions</div>
+        <div class="card-body">
+          <form class="row g-3">
+            <div class="col-md-4">Give The Right To Vote To :</div>
+
+            <div class="col-md-4">
+              <div class="input-group">
+                <span class="input-group-text" id="inputGroupPrepend2">0x</span>
+                <input
+                  type="text"
+                  class="form-control addressToGiveRightToVote"
+                  id="validationDefaultUsername"
+                  aria-describedby="inputGroupPrepend2"
+                  minlength="40"
+                  maxlength="40"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <button
+                type="submit"
+                class="btn btn-primary mb-3 giveRightToVoteButton"
+              >
+                Give Right
+              </button>
+            </div>
+          </form>
+
+          <form class="row g-3">
+            <div class="col-md-4">Start the Election:</div>
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+              <button
+                type="submit"
+                class="btn btn-primary mb-3 startTheElection"
+              >
+                Start The Election
+              </button>
+            </div>
+          </form>
+
+          <form class="row g-3">
+            <div class="col-md-4">End the Election:</div>
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-primary mb-3 endTheElection">
+                End The Election
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Voter Functions</div>
+        <div class="card-body">
+          <form class="row g-3">
+            <div class="col-md-4">Register as Voter</div>
+
+            <div class="col-md-4">
+              <input
+                type="text"
+                class="form-control addressToRegister"
+                id="validationDefaultUsername"
+                aria-describedby="inputGroupPrepend2"
+                minlength="7"
+                maxlength="7"
+                required
+              />
+            </div>
+
+            <div class="col-md-4">
+              <button
+                type="submit"
+                class="btn btn-primary mb-3 registerAsVoter"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+
+          <form class="row g-3">
+            <div class="col-md-4">Cast your Vote</div>
+
+            <div class="col-md-4">
+              <select id="cars" class="candidatesNumber"></select>
+            </div>
+
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-primary mb-3 vote">
+                Vote
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"
+      type="application/javascript"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="contractAddressAndAbi.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
